@@ -69,5 +69,6 @@ public class SistemaClinica
     {
         Paciente paciente = getPaciente(dniPaciente);
         facturaBuilder.build(paciente, turno, descuento, costoTotal);
+        // falta la parte de agregar la factura al TurnoMedico
     }
 }
