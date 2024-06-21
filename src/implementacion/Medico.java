@@ -19,7 +19,13 @@ public abstract class Medico extends Persona{
 		 
 	}
 	
-	public void ealizarConsulta(TurnoMedicoBuilder turno) {
+	public void realizarConsulta(TurnoMedicoBuilder turno) 
+	{
 		
+	}
+
+	public boolean soyElMedico(int nroMatricula)
+	{
+		return this.nroMatricula == nroMatricula;
 	}
 }

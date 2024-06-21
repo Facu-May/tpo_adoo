@@ -1,6 +1,7 @@
 package implementacion;
 
-public abstract class Persona {
+public abstract class Persona 
+{
 	String nombre;
 	String apellido;
 	String edad;
@@ -22,9 +23,12 @@ public abstract class Persona {
 	}
 
 
-	public void setApellido(String apellido) {
+	public void setApellido(String apellido) 
+	{
 		this.apellido = apellido;
 	}
+
+	
 	
 	
 

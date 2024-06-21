@@ -3,6 +3,7 @@ package implementacion;
 import java.util.*;
 
 public class Paciente {
+
 	Date fechaDeNacimietno;
 	
 	int telefono;
@@ -48,6 +49,12 @@ public class Paciente {
 		for (TurnoMedico turno: listaTurnos) {
 			//Agregar despues para ver el historial de los turnos	
 		}
+	}
+
+
+	public boolean soyElPaciente(int dni)
+	{
+		return this.dni == dni;
 	}
 
 	
