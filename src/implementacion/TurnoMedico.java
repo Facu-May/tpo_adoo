@@ -19,8 +19,10 @@ Paciente cliente;
 	
 	String motivoConsulta;
 
+	String tratamiento;
+
 	public TurnoMedico(int id, Paciente cliente, Medico medicoAsignado, double costoTotal, int complejidad,
-			Date fechaHora, String estado, String motivoConsulta) {
+			Date fechaHora, String estado, String motivoConsulta, String tratamiento) {
 		super();
 		this.id = id;
 		this.cliente = cliente;
@@ -30,6 +32,7 @@ Paciente cliente;
 		this.fechaHora = fechaHora;
 		this.estado = estado;
 		this.motivoConsulta = motivoConsulta;
+		this.tratamiento = tratamiento;
 	}
 
 	public Paciente getCliente() {
@@ -95,7 +98,13 @@ Paciente cliente;
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public String getTratamiento(){
+		return tratamiento;
+	}
 	
-	
+	public void setTratamiento(String tratamiento){
+		this.tratamiento = tratamiento;
+	}
 	
 }

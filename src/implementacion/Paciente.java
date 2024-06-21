@@ -2,7 +2,7 @@ package implementacion;
 
 import java.util.*;
 
-public class Paciente {
+public class Paciente extends Persona{
 	Date fechaDeNacimietno;
 	
 	int telefono;
