@@ -1,9 +1,10 @@
 package interfaz;
 
+import implementacion.ConcreteSubject;
 import implementacion.TurnoMedico;
 
 
 public interface Observer {
-
-	void update(int opcion, int id);
+	
+	void update();
 }
