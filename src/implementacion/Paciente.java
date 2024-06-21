@@ -12,7 +12,7 @@ public class Paciente {
 	
 	String obraSocial;
 	
-	int dni; /*Nunca agregamos DNI*/
+	int dni; 
 	
 	ArrayList<TurnoMedico> listaTurnos = new ArrayList<TurnoMedico>();
 	
@@ -55,6 +55,11 @@ public class Paciente {
 	public boolean soyElPaciente(int dni)
 	{
 		return this.dni == dni;
+	}
+
+	public void addTurnoMedico(TurnoMedico turno)
+	{
+		listaTurnos.add(turno);
 	}
 
 	

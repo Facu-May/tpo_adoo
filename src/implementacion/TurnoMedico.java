@@ -3,26 +3,34 @@ package implementacion;
 import java.util.Date;
 
 public class TurnoMedico {
-Paciente cliente;
+	
+	private Paciente cliente;
 
-	int id;
-	
-	Medico medicoAsignado;
-	
-	double costoTotal;
-	
-	int complejidad;
-	
-	Date fechaHora;
-	
-	String estado;
-	
-	String motivoConsulta;
+	private int id;
 
-	public TurnoMedico(int id, Paciente cliente, Medico medicoAsignado, double costoTotal, int complejidad,
-			Date fechaHora, String estado, String motivoConsulta) {
+	private static int incremental = 0;
+	
+	private Medico medicoAsignado;
+	
+	private double costoTotal;
+	
+	private int complejidad;
+	
+	private Date fechaHora;
+	
+	private String estado;
+	
+	private String motivoConsulta;
+
+	private String tratamiento;
+
+	private Factura fact;
+
+	public TurnoMedico(Paciente cliente, Medico medicoAsignado, double costoTotal, int complejidad,
+			Date fechaHora, String estado, String motivoConsulta, String tratamiento) {
 		super();
-		this.id = id;
+		incremental++;
+		this.id = incremental;
 		this.cliente = cliente;
 		this.medicoAsignado = medicoAsignado;
 		this.costoTotal = costoTotal;
@@ -30,6 +38,7 @@ Paciente cliente;
 		this.fechaHora = fechaHora;
 		this.estado = estado;
 		this.motivoConsulta = motivoConsulta;
+		this.tratamiento = tratamiento;
 	}
 
 	public Paciente getCliente() {
@@ -92,10 +101,16 @@ Paciente cliente;
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public String getTratamiento(){
+		return tratamiento;
 	}
 	
-	
+	public void setTratamiento(String tratamiento){
+		this.tratamiento = tratamiento;
+	}
+
+	public void setFactura(Factura fact) {
+		this.fact = fact;
+	}
 	
 }

@@ -16,14 +16,12 @@ public class SistemaClinica
     List<TurnoMedico> turnos;
     //implementación singleton
     private static SistemaClinica instance;
-    private FacturaBuilder facturaBuilder;
     private TurnoMedicoBuilder turnoMedicoBuilder;
 
     private SistemaClinica() {
         pacientes = new ArrayList<>();
         medicos = new ArrayList<>();
         turnos = new ArrayList<>();
-        this.facturaBuilder = new ConcreteFacturaBuilder();
         this.turnoMedicoBuilder = new ConcreteTurnoBuilder();
     }
 
@@ -34,11 +32,21 @@ public class SistemaClinica
         return instance;
     }
 
-    public void crearTurnoMedico(int dniPaciente, int matriculaMedico, String motivo, int complejidad, String estado, double costo, String fecha)
+    public void crearTurnoMedico(int dniPaciente, int matriculaMedico, String motivo, int complejidad, String estado, double costo, String fch, String tratamiento)
     {
         Paciente paciente = getPaciente(dniPaciente);
         Medico medico = getMedico(matriculaMedico);
-        // falta la parte de TurnoMedico 
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); // Define el formato
+        try 
+        {
+            Date fecha = formato.parse(fch);
+            TurnoMedico turno = turnoMedicoBuilder.build(paciente, medico, costo, complejidad, fecha, estado, motivo, tratamiento);
+            /* Faltaría la parte dentro de ConcreteTurnoBuilder de crear la factura */
+            turnos.add(turno);
+        } catch (ParseException e) {
+            System.err.println("Error al analizar la fecha: " + e.getMessage());
+            return;
+        }
     }
 
     private Medico getMedico(int matriculaMedico) 
@@ -67,13 +75,7 @@ public class SistemaClinica
     }
 
 
-    // falta lo de TurnoMedico
-    public void crearFactura(TurnoMedico turno, int dniPaciente, int descuento, double costoTotal)
-    {
-        Paciente paciente = getPaciente(dniPaciente);
-        facturaBuilder.build(paciente, turno, descuento, costoTotal);
-        // falta la parte de agregar la factura al TurnoMedico
-    }
+   
 
     public void crearPaciente(String fchNac,int dni, String nombre, String apellido, String direccion, String obraSocial, boolean jubilado, int telefono)
     {
@@ -88,5 +90,5 @@ public class SistemaClinica
         }
     }
 
-    
+
 }

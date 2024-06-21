@@ -2,72 +2,85 @@ package implementacion;
 
 import java.util.*;
 
+import interfaz.FacturaBuilder;
 import interfaz.TurnoMedicoBuilder;
 
 public class ConcreteTurnoBuilder implements TurnoMedicoBuilder {
 
-	private ArrayList<TurnoMedico> turnoMedico = new ArrayList<TurnoMedico>();
+	private TurnoMedico turnomedico; // <---- acá es null
 	
-	public Paciente buscarCliente(int id) {
-		for(TurnoMedico turnomedico : turnoMedico){
-			if (turnomedico.getId() == id) {
-				return turnomedico.getCliente();
-			}
+    private FacturaBuilder facturaBuilder = new ConcreteFacturaBuilder();
+	
+	public Paciente buscarCliente(int id) 
+	{
+		if (turnomedico.getId() == id) {
+			return turnomedico.getCliente();
 		}
+		
 		return null;
 	};
 	
 	public double obtenerCostoTotal(int id, int descuento) {
-		for(TurnoMedico turnomedico : turnoMedico){
 			if (turnomedico.getId() == id) {
 				return (turnomedico.getCostoTotal() - descuento);
 			}
-		}
+		
 		return -1;
 	};
 	
 	public int obtenerComplejidad(int id) {
-		for (TurnoMedico turnomedico : turnoMedico) {
 			if (turnomedico.getId() == id) {
 				return turnomedico.getComplejidad();
-			}	
 		}
 		return -1;
 	};
 	
 	public Date obtenerFecha(int id) {
-		for (TurnoMedico turnomedico : turnoMedico) {
 			if(turnomedico.getId() == id) {
 				return turnomedico.getFechaHora();
 			}
-		}
+		
 		return null;
 	};
 	
 	public String obtenerEstado(int id) {
-		for (TurnoMedico turnomedico : turnoMedico) {
 			if (turnomedico.getId() == id) {
 				return turnomedico.getEstado();
 			}
-		}
+		
 		return null;
 	};
 	
 	public String obtenerMotivo(int id) {
-		for (TurnoMedico turnomedico : turnoMedico) {
 			if(turnomedico.getId() == id) {
 				return turnomedico.getMotivoConsulta();
 			}
-		}
+		
 		return null;
 	};
 	
 	public Medico obtenerMedicoAsignado(int id, int matricula) {
-		for (TurnoMedico turnomedico : turnoMedico) {
 			if(turnomedico.getMedicoAsignado().getNroMatricula() == matricula) {
 				return turnomedico.getMedicoAsignado();
 			}
-		}
+		
 		return null;
+	}
+
+	@Override
+	public TurnoMedico build(Paciente paciente, Medico medico, double costo, int complejidad, Date fecha,
+			String estado, String motivo, String tratamiento) {
+		// TODO Auto-generated method stub
+		this.turnomedico = new TurnoMedico(paciente, medico, costo, complejidad, fecha, estado, motivo, tratamiento); // <---- acá se crea el objeto
+		/* Falta la parte de buildFactura, pensar en cómo obtener el total y el descuento */
+		return this.turnomedico; // <---- acá se retorna el objeto
+	}
+
+	@Override
+	public void buildFactura(Paciente paciente, TurnoMedico turno, int descuento, double total) {
+		// TODO Auto-generated method stub
+		Factura factura = facturaBuilder.build(paciente, turno, descuento, total);
+		turnomedico.setFactura(factura);
+		
 	};
 }

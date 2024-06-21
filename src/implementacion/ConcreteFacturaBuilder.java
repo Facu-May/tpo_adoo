@@ -33,9 +33,10 @@ public class ConcreteFacturaBuilder implements FacturaBuilder
         return this.factura;
     }
     @Override
-    public void build(Paciente paciente, TurnoMedico turno, int descuento, double total) {
+    public Factura build(Paciente paciente, TurnoMedico turno, int descuento, double total) {
         // TODO Auto-generated method stub
         this.factura = new Factura(paciente, turno, descuento, descuento);
+        return this.factura;
     }
 
 }
