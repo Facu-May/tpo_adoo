@@ -1,6 +1,9 @@
 package implementacion;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import interfaz.FacturaBuilder;
@@ -71,4 +74,19 @@ public class SistemaClinica
         facturaBuilder.build(paciente, turno, descuento, costoTotal);
         // falta la parte de agregar la factura al TurnoMedico
     }
+
+    public void crearPaciente(String fchNac,int dni, String nombre, String apellido, String direccion, String obraSocial, boolean jubilado, int telefono)
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); // Define el formato
+        try {
+            Date fecha = formato.parse(fchNac);
+            Paciente paciente = new Paciente(fecha, telefono, direccion, obraSocial, jubilado, dni);
+            pacientes.add(paciente);
+        } catch (ParseException e) {
+            System.err.println("Error al analizar la fecha: " + e.getMessage());
+            return;
+        }
+    }
+
+    
 }
