@@ -2,9 +2,9 @@ package implementacion;
 
 public abstract class Persona 
 {
-	String nombre;
-	String apellido;
-	String edad;
+	protected String nombre;
+	protected String apellido;
+	protected String edad;
 	
 
 
@@ -28,7 +28,7 @@ public abstract class Persona
 		this.apellido = apellido;
 	}
 
-	
+
 	
 	
 

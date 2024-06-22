@@ -2,10 +2,9 @@ package implementacion;
 
 import interfaz.TurnoMedicoBuilder;
 
-public abstract class Medico extends Persona{
-	int nroMatricula;
-	
-	
+public abstract class Medico extends Persona
+{
+	protected int nroMatricula;
 
 	public int getNroMatricula() {
 		return nroMatricula;
@@ -28,4 +27,5 @@ public abstract class Medico extends Persona{
 	{
 		return this.nroMatricula == nroMatricula;
 	}
+	public abstract int getPrecio();
 }
