@@ -4,7 +4,12 @@ public abstract class Persona
 {
 	protected String nombre;
 	protected String apellido;
-	protected String edad;
+
+	protected Persona(String nombre, String apellido) 
+	{
+		this.nombre = nombre;
+		this.apellido = apellido;
+	}
 	
 
 

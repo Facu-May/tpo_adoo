@@ -73,14 +73,19 @@ public class ConcreteTurnoBuilder implements TurnoMedicoBuilder {
 		// TODO Auto-generated method stub
 		this.turnomedico = new TurnoMedico(paciente, medico, costo, complejidad, fecha, estado, motivo, tratamiento); // <---- acá se crea el objeto
 		/* Falta la parte de buildFactura, pensar en cómo obtener el total y el descuento */
+		int precio = medico.getPrecio();
+		int descuento = paciente.getDescuento();
+		buildFactura(paciente, turnomedico, precio, descuento);
 		return this.turnomedico; // <---- acá se retorna el objeto
 	}
 
 	@Override
-	public void buildFactura(Paciente paciente, TurnoMedico turno, int descuento, double total) {
+	public void buildFactura(Paciente paciente, TurnoMedico turno, int total, int descuento) {
 		// TODO Auto-generated method stub
-		Factura factura = facturaBuilder.build(paciente, turno, descuento, total);
+		Factura factura = facturaBuilder.build(paciente, turno, total, descuento);
 		turnomedico.setFactura(factura);
 		
 	};
+
+
 }

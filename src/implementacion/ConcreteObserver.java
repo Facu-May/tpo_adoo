@@ -3,26 +3,19 @@ package implementacion;
 import interfaz.Observer;
 
 public class ConcreteObserver implements Observer {
-
-	private String name;
-	
-	private int nro_paciente;
-	
-	private TurnoMedico turnomedico; 
+	private Paciente paciente;
+	private ConcreteSubject sujeto;
+	//private TurnoMedico turnoMedico;
 	
 
-	public ConcreteObserver(String name, int nro_paciente,TurnoMedico turnomedico ) {
-        this.name = name;
-        this.nro_paciente = nro_paciente;
-        this.turnomedico = turnomedico;
+	public ConcreteObserver() {
+      
     }
 	
-
     @Override
-    public void update(int opcion, int id) {
-    	/*Acomodar segun que desea notificar con la opcion y estoy pensando que 
-    	 * cada observer va a ser un paciente que se le notifique y se le asocie el turno medico */
-    	
-        System.out.println("El doctor " + turnomedico.getMedicoAsignado().getNombre() + " le notifica que lo espera el dia " + turnomedico.getFechaHora());
+    public void update() {
+    	int id = sujeto.getIdTurnoMedico();
+    	TurnoMedico turnoMedico = paciente.getTurnoMedico(id);
+        System.out.println("El medico " + turnoMedico.getMedicoAsignado().getNombre() + "ha notificado a " + paciente.getNombre() + "");
     }
 }

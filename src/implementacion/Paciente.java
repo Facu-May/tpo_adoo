@@ -2,24 +2,26 @@ package implementacion;
 
 import java.util.*;
 
-public class Paciente {
+public class Paciente extends Persona{
 
-	Date fechaDeNacimietno;
+	private Date fechaDeNacimietno;
 	
-	int telefono;
+	private int telefono;
 	
-	String direccion;
+	private String direccion;
 	
-	String obraSocial;
+	private String obraSocial;
 	
-	int dni; 
+	private int dni; 
 	
-	ArrayList<TurnoMedico> listaTurnos = new ArrayList<TurnoMedico>();
+	private ArrayList<TurnoMedico> listaTurnos = new ArrayList<TurnoMedico>();
 	
-	boolean jubilado;
+	private boolean jubilado;
 
-	public Paciente(Date fechaDeNacimietno, int telefono, String direccion, String obraSocial, boolean jubilado, int dni) {
-		super();
+	public Paciente(String nombre, String apellido, 
+	Date fechaDeNacimietno, int telefono, 
+	String direccion, String obraSocial, boolean jubilado, int dni) {
+		super(nombre,apellido);
 		this.fechaDeNacimietno = fechaDeNacimietno;
 		this.telefono = telefono;
 		this.direccion = direccion;
@@ -46,7 +48,8 @@ public class Paciente {
 	}
 
 	public void verHistorialMedico() {
-		for (TurnoMedico turno: listaTurnos) {
+		for (TurnoMedico turno: listaTurnos) 
+		{
 			//Agregar despues para ver el historial de los turnos	
 		}
 	}
@@ -62,9 +65,48 @@ public class Paciente {
 		listaTurnos.add(turno);
 	}
 
+	public String getNombre()
+	{
+		return "";
+	}
 	
+	public TurnoMedico getTurnoMedico(int id) 
+	{ 
+		for(TurnoMedico turno : listaTurnos) 
+		{
+			if(turno.getId() == id) 
+			{
+				return turno;
+			} 
+		}
+		 return null;
+	}
 	
-	
+	public int getDescuento()
+	{
+		int descuento = 0;
+		if(jubilado)
+		{
+			descuento = 50;
+		}
+		if(this.obraSocial.equals("PAMI"))
+		{
+			descuento = descuento + 20;
+		}
+		else if(this.obraSocial.equals("OSDE"))
+		{
+			descuento = descuento + 30;
+		}
+		else if(this.obraSocial.equals("SWISS MEDICAL"))
+		{
+			descuento = descuento + 40;
+		}
+		else if(this.obraSocial.equals("IOSFA"))
+		{
+			descuento = descuento + 50;
+		}
+		return descuento;
+	}
 	
 }
 

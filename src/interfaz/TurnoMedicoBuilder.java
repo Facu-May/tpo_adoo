@@ -28,7 +28,7 @@ public interface TurnoMedicoBuilder {
 	TurnoMedico build(Paciente paciente, Medico medico, double costo, int complejidad, Date fecha,
 	String estado, String motivo, String tratamiento);
 
-	void buildFactura(Paciente paciente, TurnoMedico turno, int descuento, double total);
+	void buildFactura(Paciente paciente, TurnoMedico turno, int total, int descuento);
 	
 	
 	

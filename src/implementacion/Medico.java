@@ -6,6 +6,11 @@ public abstract class Medico extends Persona
 {
 	protected int nroMatricula;
 
+	protected Medico(String nombre, String apellido, int nroMatricula) {
+		super(nombre, apellido);
+		this.nroMatricula = nroMatricula;
+	}
+
 	public int getNroMatricula() {
 		return nroMatricula;
 	}
@@ -28,4 +33,5 @@ public abstract class Medico extends Persona
 		return this.nroMatricula == nroMatricula;
 	}
 	public abstract int getPrecio();
+	public abstract String getEspecialidad();
 }

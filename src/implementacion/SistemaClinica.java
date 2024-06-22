@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import interfaz.EstrategiaFiltrado;
 import interfaz.FacturaBuilder;
 import interfaz.TurnoMedicoBuilder;
 
@@ -17,6 +18,7 @@ public class SistemaClinica
     //implementación singleton
     private static SistemaClinica instance;
     private TurnoMedicoBuilder turnoMedicoBuilder;
+    private EstrategiaFiltrado estrategiaFiltrado;
 
     private SistemaClinica() {
         pacientes = new ArrayList<>();
@@ -82,12 +84,16 @@ public class SistemaClinica
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); // Define el formato
         try {
             Date fecha = formato.parse(fchNac);
-            Paciente paciente = new Paciente(fecha, telefono, direccion, obraSocial, jubilado, dni);
+            Paciente paciente = new Paciente(nombre,apellido,fecha, telefono, direccion, obraSocial, jubilado, dni);
             pacientes.add(paciente);
         } catch (ParseException e) {
             System.err.println("Error al analizar la fecha: " + e.getMessage());
             return;
         }
+    }
+
+    public EstrategiaFiltrado getEstrategiaFiltrado() {
+        return estrategiaFiltrado;
     }
 
 

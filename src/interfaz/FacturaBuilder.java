@@ -15,5 +15,5 @@ public interface FacturaBuilder
 
     Factura obtenerFactura();
 
-    Factura build(Paciente paciente, TurnoMedico turno, int descuento, double total);
+    Factura build(Paciente paciente, TurnoMedico turno, int total, int descuento);
 }
