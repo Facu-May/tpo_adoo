@@ -13,7 +13,8 @@ public class ConcreteObserver implements Observer {
     }
 	
     @Override
-    public void update() {
+    public void update() 
+    {
     	int id = sujeto.getIdTurnoMedico();
     	TurnoMedico turnoMedico = paciente.getTurnoMedico(id);
         System.out.println("El medico " + turnoMedico.getMedicoAsignado().getNombre() + "ha notificado a " + paciente.getNombre() + "");
