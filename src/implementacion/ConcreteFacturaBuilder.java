@@ -2,7 +2,8 @@ package implementacion;
 
 import interfaz.FacturaBuilder;
 
-public class ConcreteFacturaBuilder implements FacturaBuilder {
+public class ConcreteFacturaBuilder implements FacturaBuilder 
+{
 	
 	private Factura factura;
 
@@ -29,6 +30,12 @@ public class ConcreteFacturaBuilder implements FacturaBuilder {
     };
 
     public Factura obtenerFactura(){
+        return this.factura;
+    }
+    @Override
+    public Factura build(Paciente paciente, TurnoMedico turno, int total, int descuento) {
+        // TODO Auto-generated method stub
+        this.factura = new Factura(paciente, turno, total, descuento);
         return this.factura;
     }
 

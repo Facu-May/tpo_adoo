@@ -1,10 +1,14 @@
 package implementacion;
 
 
-public abstract class Medico extends Persona{
-	int nroMatricula;
-	
-	
+public abstract class Medico extends Persona
+{
+	protected int nroMatricula;
+
+	protected Medico(String nombre, String apellido, int nroMatricula) {
+		super(nombre, apellido);
+		this.nroMatricula = nroMatricula;
+	}
 
 	public int getNroMatricula() {
 		return nroMatricula;
@@ -14,6 +18,13 @@ public abstract class Medico extends Persona{
 		this.nroMatricula = nroMatricula;
 	}
 
+
+	public boolean soyElMedico(int nroMatricula)
+	{
+		return this.nroMatricula == nroMatricula;
+	}
+	public abstract int getPrecio();
+	public abstract String getEspecialidad();
     public void programarCita(Paciente paciente, TurnoMedico cita) {
         cita.setMedicoAsignado(this);
         cita.setCliente(paciente);

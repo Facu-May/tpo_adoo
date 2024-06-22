@@ -2,7 +2,8 @@ package interfaz;
 
 import implementacion.*;
 
-public interface FacturaBuilder {
+public interface FacturaBuilder 
+{
 
 	String ObtenerDetalleFactura();
     Paciente obtenerPaciente(int dni);
@@ -13,4 +14,6 @@ public interface FacturaBuilder {
     int obtenerDescuento(Paciente paciente);
 
     Factura obtenerFactura();
+
+    Factura build(Paciente paciente, TurnoMedico turno, int total, int descuento);
 }

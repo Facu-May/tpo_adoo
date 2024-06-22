@@ -51,5 +51,10 @@ public class Factura {
 		return "Factura [paciente=" + paciente + ", turnoMedico=" + turnoMedico + ", total=" + total + ", descuento="
 				+ descuento + "]";
 	}
+
+    public int getTotalConDescuento()
+    {
+        return (int) total - (total * (descuento/100));
+    }
     
 }

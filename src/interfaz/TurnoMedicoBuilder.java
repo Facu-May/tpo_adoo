@@ -2,8 +2,10 @@ package interfaz;
 
 import java.util.*;
 
+import implementacion.Factura;
 import implementacion.Medico;
 import implementacion.Paciente;
+import implementacion.TurnoMedico;
 
 public interface TurnoMedicoBuilder {
 	
@@ -22,6 +24,11 @@ public interface TurnoMedicoBuilder {
 	String obtenerMotivo(int dni);
 	
 	Medico obtenerMedicoAsignado(int dni, int matricula);
+
+	TurnoMedico build(Paciente paciente, Medico medico, double costo, int complejidad, Date fecha,
+	String estado, String motivo, String tratamiento);
+
+	void buildFactura(Paciente paciente, TurnoMedico turno, int total, int descuento);
 	
 	
 	
