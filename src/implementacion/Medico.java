@@ -1,6 +1,5 @@
 package implementacion;
 
-import interfaz.TurnoMedicoBuilder;
 
 public abstract class Medico extends Persona
 {
@@ -19,14 +18,6 @@ public abstract class Medico extends Persona
 		this.nroMatricula = nroMatricula;
 	}
 
-	public void programarCita(Paciente paciente,TurnoMedicoBuilder cita) {
-		 
-	}
-	
-	public void realizarConsulta(TurnoMedicoBuilder turno) 
-	{
-		
-	}
 
 	public boolean soyElMedico(int nroMatricula)
 	{
@@ -34,4 +25,18 @@ public abstract class Medico extends Persona
 	}
 	public abstract int getPrecio();
 	public abstract String getEspecialidad();
+    public void programarCita(Paciente paciente, TurnoMedico cita) {
+        cita.setMedicoAsignado(this);
+        cita.setCliente(paciente);
+        cita.setEstado("Programada");
+    }
+	
+    public void realizarConsulta(TurnoMedico turno, String tratamiento) {
+        if (turno.getEstado()=="Programada") {
+            turno.setEstado("Realizada");
+            turno.setTratamiento(tratamiento);
+        } else {
+            System.out.println("El turno no está programado");
+        }
+    }
 }
