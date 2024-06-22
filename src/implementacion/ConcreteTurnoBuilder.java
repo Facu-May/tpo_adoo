@@ -72,7 +72,6 @@ public class ConcreteTurnoBuilder implements TurnoMedicoBuilder {
 			String estado, String motivo, String tratamiento) {
 		// TODO Auto-generated method stub
 		this.turnomedico = new TurnoMedico(paciente, medico, costo, complejidad, fecha, estado, motivo, tratamiento); // <---- acá se crea el objeto
-		/* Falta la parte de buildFactura, pensar en cómo obtener el total y el descuento */
 		int precio = medico.getPrecio();
 		int descuento = paciente.getDescuento();
 		buildFactura(paciente, turnomedico, precio, descuento);

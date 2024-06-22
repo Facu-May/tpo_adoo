@@ -4,7 +4,7 @@ public class Odontologia extends Medico
 {
 	private int precio;
 
-	public Odontologia(String nombre, String apellido, String edad, int nroMatricula) 
+	public Odontologia(String nombre, String apellido, int nroMatricula) 
 	{
 		super(nombre,apellido,nroMatricula);
 		this.precio = 1000;

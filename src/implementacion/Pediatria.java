@@ -3,7 +3,7 @@ package implementacion;
 public class Pediatria extends Medico 
 {
 	private int precio;
-	public Pediatria(String nombre, String apellido, String edad, int nroMatricula) {
+	public Pediatria(String nombre, String apellido, int nroMatricula) {
 		super(nombre,apellido,nroMatricula);
 		this.precio = 1500;
 		// TODO Auto-generated constructor stub

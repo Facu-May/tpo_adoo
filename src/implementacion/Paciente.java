@@ -68,7 +68,7 @@ public class Paciente extends Persona{
 
 	public String getNombre()
 	{
-		return "";
+		return this.apellido + ", " + this.nombre;
 	}
 	
 	public TurnoMedico getTurnoMedico(int id) 
