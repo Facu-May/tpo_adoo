@@ -14,7 +14,7 @@ public class Paciente extends Persona{
 	
 	private int dni; 
 	
-	private ArrayList<TurnoMedico> listaTurnos = new ArrayList<TurnoMedico>();
+	private ArrayList<TurnoMedico> listaTurnos;
 	
 	private boolean jubilado;
 
@@ -28,6 +28,7 @@ public class Paciente extends Persona{
 		this.obraSocial = obraSocial;
 		this.jubilado = jubilado;
 		this.dni = dni;
+		listaTurnos = new ArrayList<TurnoMedico>();
 	}
 
 	public ArrayList<TurnoMedico> getListaTurnos() {
