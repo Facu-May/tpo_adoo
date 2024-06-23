@@ -39,7 +39,6 @@ public class TurnoMedico {
 		this.estado = estado;
 		this.motivoConsulta = motivoConsulta;
 		this.tratamiento = tratamiento;
-		this.tratamiento = tratamiento;
 	}
 
 	public Paciente getCliente() {
@@ -114,4 +113,7 @@ public class TurnoMedico {
 		this.fact = fact;
 	}
 	
+	public Factura getFactura() {
+		return this.fact;
+	}
 }

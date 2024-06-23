@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Paciente extends Persona{
 
-	private Date fechaDeNacimietno;
+	private String fechaDeNacimietno;
 	
 	private int telefono;
 	
@@ -14,12 +14,10 @@ public class Paciente extends Persona{
 	
 	private int dni; 
 	
-	private ArrayList<TurnoMedico> listaTurnos;
-	
 	private boolean jubilado;
 
 	public Paciente(String nombre, String apellido, 
-	Date fechaDeNacimietno, int telefono, 
+	String fechaDeNacimietno, int telefono, 
 	String direccion, String obraSocial, boolean jubilado, int dni) {
 		super(nombre,apellido);
 		this.fechaDeNacimietno = fechaDeNacimietno;
@@ -28,16 +26,8 @@ public class Paciente extends Persona{
 		this.obraSocial = obraSocial;
 		this.jubilado = jubilado;
 		this.dni = dni;
-		listaTurnos = new ArrayList<TurnoMedico>();
 	}
 
-	public ArrayList<TurnoMedico> getListaTurnos() {
-		return listaTurnos;
-	}
-
-	public void setListaTurnos(TurnoMedico turnos) {
-		listaTurnos.add(turnos);
-	}
 	
 	public void solicitarCita(int dni, int matricula, Date fechaTurno, int complejidad) {
 		
@@ -49,11 +39,10 @@ public class Paciente extends Persona{
 	}
 
 	public void verHistorialMedico() {
-		for (TurnoMedico turno: listaTurnos) 
-		{
-			//Agregar despues para ver el historial de los turnos	
-		}
-	}
+        for (TurnoMedico turno: this.getTurnosMedico()) {
+            System.out.println(turno);
+        }
+    }
 
 
 	public boolean soyElPaciente(int dni)
@@ -63,17 +52,13 @@ public class Paciente extends Persona{
 
 	public void addTurnoMedico(TurnoMedico turno)
 	{
-		listaTurnos.add(turno);
+		this.setListaTurno(turno);
 	}
 
-	public String getNombre()
-	{
-		return this.apellido + ", " + this.nombre;
-	}
 	
 	public TurnoMedico getTurnoMedico(int id) 
 	{ 
-		for(TurnoMedico turno : listaTurnos) 
+		for(TurnoMedico turno : this.getTurnosMedico()) 
 		{
 			if(turno.getId() == id) 
 			{
@@ -108,6 +93,15 @@ public class Paciente extends Persona{
 		}
 		return descuento;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Paciente [nombre =" + nombre + "fechaDeNacimietno=" + fechaDeNacimietno + ", telefono=" + telefono + ", direccion="
+				+ direccion + ", obraSocial=" + obraSocial + ", dni=" + dni + ", jubilado=" + jubilado + "]";
+	}
+	
+
 	
 }
 

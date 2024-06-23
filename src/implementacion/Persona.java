@@ -1,9 +1,12 @@
 package implementacion;
 
+import java.util.ArrayList;
+
 public abstract class Persona 
 {
 	protected String nombre;
 	protected String apellido;
+	private ArrayList<TurnoMedico> listaTurnos = new ArrayList<TurnoMedico>();
 
 	protected Persona(String nombre, String apellido) 
 	{
@@ -11,6 +14,13 @@ public abstract class Persona
 		this.apellido = apellido;
 	}
 	
+	public ArrayList<TurnoMedico> getTurnosMedico(){
+		return listaTurnos;
+	}
+	
+	public void setListaTurno(TurnoMedico turnoMedico) {
+		listaTurnos.add(turnoMedico);
+	}
 
 
 	public String getNombre() {
