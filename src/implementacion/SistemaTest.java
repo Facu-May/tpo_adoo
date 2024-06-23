@@ -16,7 +16,6 @@ public class SistemaTest {
 
     @Before
     public void setUp() {
-    	SistemaClinica sistema = new SistemaClinica();
         Paciente paciente = new Paciente("Juan", "Perez","1621396800", 1159118721, "Calle Falsa 123", "OSDE", true, 5551234);
         Medico medico = new Pediatria("Fabian", "sosa", 445);
         sistema.agregarMedico(medico);
@@ -77,6 +76,10 @@ public class SistemaTest {
     public void testPagoSistemaExterno() {
     	SistemaClinica sistema = SistemaClinica.getInstance();
     	assertEquals("Pago Realizado Con Exito",sistema.pagoRealizado());
+    }
+    
+    public void filtrarCitasPorEspecialidad() {
+    	
     }
     
     
