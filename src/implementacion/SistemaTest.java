@@ -69,7 +69,7 @@ public class SistemaTest {
     	Paciente paciente = sistema.getPaciente(44813781);
     	sistema.crearTurnoMedico(44813782, 1111, "Fractura", 2, "Programada", 200, "22/04/2022", "Tratamiento nashe");
     	
-    	assertEquals(44813782, sistema.getTurnoMedico(1).getFactura().getPaciente().getDni());
+    	assertEquals(1, sistema.getTurnoMedico(1).getFactura().getId());
     }
     
     @Test
@@ -78,7 +78,8 @@ public class SistemaTest {
     	assertEquals("Pago Realizado Con Exito",sistema.pagoRealizado());
     }
     
-    public void filtrarCitasPorEspecialidad() {
+    public void filtrarCitasPorEspecialidad() 
+    {
     	
     }
     

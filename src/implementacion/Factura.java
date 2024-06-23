@@ -6,12 +6,16 @@ public class Factura {
     private TurnoMedico turnoMedico;
     private int total;
     private int descuento;
+    private int id;
+    private static int incremental = 0;
 
     public Factura(Paciente paciente, TurnoMedico turnoMedico, int total, int descuento) {
         this.paciente = paciente;
         this.turnoMedico = turnoMedico;
         this.total = total;
         this.descuento = descuento;
+        incremental++;
+        this.id = incremental;
     }
 
     public Paciente getPaciente() {
@@ -55,6 +59,10 @@ public class Factura {
     public int getTotalConDescuento()
     {
         return (int) total - (total * (descuento/100));
+    }
+
+    public int getId() {
+        return id;
     }
     
 }
