@@ -6,13 +6,14 @@ import java.util.List;
 import interfaz.EstrategiaFiltrado;
  
 public class EstrategiaMedico implements EstrategiaFiltrado {
-	private List<TurnoMedico> turnos;
-	@Override
 	
-	public List<TurnoMedico> filtrarBusqueda(TurnoMedico turnoMedico) {
-		List<TurnoMedico> turnosFiltrados = new ArrayList<>();
-		for (TurnoMedico turno : turnos) {
-            if (turno.getMedicoAsignado().getEspecialidad().equals(turnoMedico.getMedicoAsignado().getEspecialidad()))
+	@Override
+	public ArrayList<TurnoMedico> filtrarBusqueda(ArrayList<TurnoMedico> turnosMedicos, String especialidad) {
+		ArrayList<TurnoMedico> turnosFiltrados = new ArrayList<TurnoMedico>();
+
+		for (TurnoMedico turno : turnosMedicos) {
+			
+            if (turno.getMedicoAsignado().getEspecialidad().equals(especialidad))
             {
                 turnosFiltrados.add(turno);
             }

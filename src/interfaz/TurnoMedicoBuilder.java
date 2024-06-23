@@ -17,7 +17,7 @@ public interface TurnoMedicoBuilder {
 	
 	int obtenerComplejidad(int dni);
 	
-	Date obtenerFecha(int dni);
+	String obtenerFecha(int dni);
 	
 	String obtenerEstado(int dni);
 	
@@ -25,7 +25,7 @@ public interface TurnoMedicoBuilder {
 	
 	Medico obtenerMedicoAsignado(int dni, int matricula);
 
-	TurnoMedico build(Paciente paciente, Medico medico, double costo, int complejidad, Date fecha, String estado, String motivo, String tratamiento);
+	TurnoMedico build(Paciente paciente, Medico medico, double costo, int complejidad, String fecha, String estado, String motivo, String tratamiento);
 
 	void buildFactura(Paciente paciente, TurnoMedico turno, int total, int descuento);
 	

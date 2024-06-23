@@ -11,6 +11,7 @@ public abstract class Medico extends Persona
 		this.nroMatricula = nroMatricula;
 	}
 
+
 	public int getNroMatricula() {
 		return nroMatricula;
 	}
