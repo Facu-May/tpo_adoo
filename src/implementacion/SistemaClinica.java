@@ -7,10 +7,10 @@ import java.util.Date;
 import java.util.List;
 
 import interfaz.EstrategiaFiltrado;
-import interfaz.FacturaBuilder;
+import interfaz.PagoExterno;
 import interfaz.TurnoMedicoBuilder;
 
-public class SistemaClinica 
+public class SistemaClinica implements PagoExterno
 {
     List<Paciente> pacientes;
     List<Medico> medicos;
@@ -19,8 +19,9 @@ public class SistemaClinica
     private static SistemaClinica instance;
     private TurnoMedicoBuilder turnoMedicoBuilder;
     private EstrategiaFiltrado estrategiaFiltrado;
+	
 
-    private SistemaClinica() {
+    public SistemaClinica() {
         pacientes = new ArrayList<>();
         medicos = new ArrayList<>();
         turnos = new ArrayList<>();
@@ -30,11 +31,19 @@ public class SistemaClinica
     public static SistemaClinica getInstance() {
         if (instance == null) {
             instance = new SistemaClinica();
+            
         }
+        
         return instance;
     }
+    
+    
+    public void agregarMedico(Medico medico)
+    {
+        medicos.add(medico);
+    }
 
-    public void crearTurnoMedico(int dniPaciente, int matriculaMedico, String motivo, int complejidad, String estado, double costo, String fch, String tratamiento)
+    public TurnoMedico crearTurnoMedico(int dniPaciente, int matriculaMedico, String motivo, int complejidad, String estado, double costo, String fch, String tratamiento)
     {
         Paciente paciente = getPaciente(dniPaciente);
         Medico medico = getMedico(matriculaMedico);
@@ -45,10 +54,19 @@ public class SistemaClinica
             TurnoMedico turno = turnoMedicoBuilder.build(paciente, medico, costo, complejidad, fecha, estado, motivo, tratamiento);
             /* Faltaría la parte dentro de ConcreteTurnoBuilder de crear la factura */
             turnos.add(turno);
+            return turno;
         } catch (ParseException e) {
             System.err.println("Error al analizar la fecha: " + e.getMessage());
-            return;
+            return null;
         }
+    }
+    public TurnoMedico getTurnoMedico(int id) {
+    	for(TurnoMedico turno : turnos) {
+    		if(turno.getId() == id) {
+    			return turno;
+    		}
+    	}
+    	return null;
     }
 
     private Medico getMedico(int matriculaMedico) 
@@ -64,7 +82,7 @@ public class SistemaClinica
         return null;
     }
 
-    private Paciente getPaciente(int dni)
+    Paciente getPaciente(int dni)
     {
         for (Paciente paciente : pacientes)
         {
@@ -81,19 +99,42 @@ public class SistemaClinica
 
     public void crearPaciente(String fchNac,int dni, String nombre, String apellido, String direccion, String obraSocial, boolean jubilado, int telefono)
     {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); // Define el formato
+        /*SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); // Define el formato
         try {
-            Date fecha = formato.parse(fchNac);
-            Paciente paciente = new Paciente(nombre,apellido,fecha, telefono, direccion, obraSocial, jubilado, dni);
+            Date fecha = formato.parse(fchNac);*/
+            Paciente paciente = new Paciente(nombre, apellido, fchNac,telefono,direccion, obraSocial, jubilado, dni);
             pacientes.add(paciente);
-        } catch (ParseException e) {
+            System.out.println("Se ingreso el paciente");
+        /*} catch (ParseException e) {
             System.err.println("Error al analizar la fecha: " + e.getMessage());
             return;
-        }
+        }*/
     }
 
+	@Override
+	public String pagoRealizado() {
+		return "Pago Realizado Con Exito";
+		
+	}
+
+	@Override
+	public String pagoRechazado() {
+		return "Pago Rechazado";
+		
+	}
+
+	@Override
+	public String pagoEspera() {
+		return "Pago en espera";
+	}
+	
+
     public EstrategiaFiltrado getEstrategiaFiltrado() {
-        return estrategiaFiltrado;
+        return this.estrategiaFiltrado;
+    }
+    
+    public void setEstrategiaFiltrado(EstrategiaFiltrado estrategiaFiltrado) {
+    	this.estrategiaFiltrado = estrategiaFiltrado;
     }
 
 

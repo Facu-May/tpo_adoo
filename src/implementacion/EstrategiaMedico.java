@@ -8,6 +8,7 @@ import interfaz.EstrategiaFiltrado;
 public class EstrategiaMedico implements EstrategiaFiltrado {
 	private List<TurnoMedico> turnos;
 	@Override
+	
 	public List<TurnoMedico> filtrarBusqueda(TurnoMedico turnoMedico) {
 		List<TurnoMedico> turnosFiltrados = new ArrayList<>();
 		for (TurnoMedico turno : turnos) {
