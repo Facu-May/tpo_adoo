@@ -12,9 +12,9 @@ import interfaz.TurnoMedicoBuilder;
 
 public class SistemaClinica implements PagoExterno
 {
-    List<Paciente> pacientes;
-    List<Medico> medicos;
-    List<TurnoMedico> turnos;
+    ArrayList<Paciente> pacientes;
+    ArrayList<Medico> medicos;
+    ArrayList<TurnoMedico> turnos;
     //implementación singleton
     private static SistemaClinica instance;
     private TurnoMedicoBuilder turnoMedicoBuilder;
@@ -41,24 +41,28 @@ public class SistemaClinica implements PagoExterno
     public void agregarMedico(Medico medico)
     {
         medicos.add(medico);
+        System.out.println("se agrego el medico: " + medico.getNroMatricula());
     }
 
     public TurnoMedico crearTurnoMedico(int dniPaciente, int matriculaMedico, String motivo, int complejidad, String estado, double costo, String fch, String tratamiento)
     {
         Paciente paciente = getPaciente(dniPaciente);
         Medico medico = getMedico(matriculaMedico);
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); // Define el formato
+        
+        /*SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); // Define el formato
         try 
         {
-            Date fecha = formato.parse(fch);
-            TurnoMedico turno = turnoMedicoBuilder.build(paciente, medico, costo, complejidad, fecha, estado, motivo, tratamiento);
-            /* Faltaría la parte dentro de ConcreteTurnoBuilder de crear la factura */
-            turnos.add(turno);
-            return turno;
-        } catch (ParseException e) {
+            Date fecha = formato.parse(fch);*/
+        TurnoMedico turno = turnoMedicoBuilder.build(paciente, medico, costo, complejidad, fch, estado, motivo, tratamiento);
+        turnos.add(turno);
+        System.out.println("se creo el turno: " + turno.getId());
+        return turno;
+        
+        
+        /*} catch (ParseException e) {
             System.err.println("Error al analizar la fecha: " + e.getMessage());
             return null;
-        }
+        }*/
     }
     public TurnoMedico getTurnoMedico(int id) {
     	for(TurnoMedico turno : turnos) {
@@ -68,8 +72,16 @@ public class SistemaClinica implements PagoExterno
     	}
     	return null;
     }
+    
+    public ArrayList<TurnoMedico> getTurnosMedicos(){
+    	return this.turnos;
+    }
+    
+    public ArrayList<Paciente> getPacientes(){
+    	return this.pacientes;
+    }
 
-    private Medico getMedico(int matriculaMedico) 
+    public Medico getMedico(int matriculaMedico) 
     {
         // TODO Auto-generated method stub
         for(Medico medico: medicos)
@@ -104,7 +116,7 @@ public class SistemaClinica implements PagoExterno
             Date fecha = formato.parse(fchNac);*/
             Paciente paciente = new Paciente(nombre, apellido, fchNac,telefono,direccion, obraSocial, jubilado, dni);
             pacientes.add(paciente);
-            System.out.println("Se ingreso el paciente");
+            System.out.println("Se ingreso el paciente" + paciente.getDni());
         /*} catch (ParseException e) {
             System.err.println("Error al analizar la fecha: " + e.getMessage());
             return;
@@ -135,6 +147,10 @@ public class SistemaClinica implements PagoExterno
     
     public void setEstrategiaFiltrado(EstrategiaFiltrado estrategiaFiltrado) {
     	this.estrategiaFiltrado = estrategiaFiltrado;
+    }
+    
+    public ArrayList<TurnoMedico> filtrarBusqueda(ArrayList<TurnoMedico> turnos, String dato){
+    	return estrategiaFiltrado.filtrarBusqueda(turnos, dato);
     }
 
 

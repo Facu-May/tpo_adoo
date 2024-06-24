@@ -10,8 +10,11 @@ import interfaz.Observer;
 public class ConcreteSubject implements Subject {
 
 	private ArrayList<Observer> observers = new ArrayList<>();
-	private TurnoMedico turnoMedico;
-	private String estado;
+	private String estado = null;
+	
+	public ConcreteSubject() {
+		
+	}
 	
 	
 	public void registerObserver(Observer observer) {
@@ -22,21 +25,17 @@ public class ConcreteSubject implements Subject {
         observers.remove(observer);
     }
 	
-	public void setEstado(String estado) {
-		turnoMedico.setEstado(estado);
-		notifyObservers();
+	public void setEstado(String estado, Observer observer) {
+		this.estado = estado;
+		notifyObservers(estado, observer);
 	}
 	
-	public void notifyObservers() {
+	public void notifyObservers(String estado, Observer obsever) {
 		for(Observer observador : observers) {
-			observador.update();
+			if(observador.equals(obsever)) {
+				observador.update(estado);
+			}
 		}
 	}
-	
-	public int getIdTurnoMedico() 
-	{
-		return turnoMedico.getId();
-	}
-
 
 }

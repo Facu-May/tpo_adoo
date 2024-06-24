@@ -6,5 +6,5 @@ import implementacion.ConcreteSubject;
 
 public interface Observer {
 
-	void update();
+	void update(String estado);
 }

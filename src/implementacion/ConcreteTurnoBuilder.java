@@ -35,7 +35,7 @@ public class ConcreteTurnoBuilder implements TurnoMedicoBuilder {
 		return -1;
 	};
 	
-	public Date obtenerFecha(int id) {
+	public String obtenerFecha(int id) {
 			if(turnomedico.getId() == id) {
 				return turnomedico.getFechaHora();
 			}
@@ -68,16 +68,17 @@ public class ConcreteTurnoBuilder implements TurnoMedicoBuilder {
 	}
 
 	@Override
-	public TurnoMedico build(Paciente paciente, Medico medico, double costo, int complejidad, Date fecha,
+	public TurnoMedico build(Paciente paciente, Medico medico, double costo, int complejidad, String fecha,
 			String estado, String motivo, String tratamiento) {
 		// TODO Auto-generated method stub
 		ArrayList<TurnoMedico> turnosPaciente = paciente.getTurnosMedico();
 		
 		for(TurnoMedico turnoPaciente: turnosPaciente){
+			
             if (turnoPaciente.getFechaHora() != fecha){
                paciente.setListaTurno(turnoPaciente);
             } else{
-                System.out.println("No se puede solicitar, se superpone con uno existente");
+            	System.err.println("No se puede solicitar, se superpone con uno existente");
             }
         }
 		this.turnomedico = new TurnoMedico(paciente, medico, costo, complejidad, fecha, estado, motivo, tratamiento); // <---- acá se crea el objeto
@@ -92,7 +93,6 @@ public class ConcreteTurnoBuilder implements TurnoMedicoBuilder {
 		// TODO Auto-generated method stub
 		Factura factura = facturaBuilder.build(paciente, turno, total, descuento);
 		turnomedico.setFactura(factura);
-		
 	};
 
 

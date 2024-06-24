@@ -36,7 +36,9 @@ public class ConcreteFacturaBuilder implements FacturaBuilder
     public Factura build(Paciente paciente, TurnoMedico turno, int total, int descuento) {
         // TODO Auto-generated method stub
         this.factura = new Factura(paciente, turno, total, descuento);
+        System.out.println("Se ha generado la factura " + factura.getId() + " del paciente: " + factura.getPaciente().getNombre());
         return this.factura;
     }
+    
 
 }
