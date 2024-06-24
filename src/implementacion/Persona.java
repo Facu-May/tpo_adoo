@@ -6,12 +6,13 @@ public abstract class Persona
 {
 	protected String nombre;
 	protected String apellido;
-	private ArrayList<TurnoMedico> listaTurnos = new ArrayList<TurnoMedico>();
+	private ArrayList<TurnoMedico> listaTurnos;
 
 	protected Persona(String nombre, String apellido) 
 	{
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.listaTurnos = new ArrayList<TurnoMedico>();
 	}
 	
 	public ArrayList<TurnoMedico> getTurnosMedico(){
