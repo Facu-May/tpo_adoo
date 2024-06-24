@@ -38,8 +38,14 @@ public abstract class Medico extends Persona
         if (turno.getEstado()=="Programada") {
             turno.setEstado("Realizada");
             turno.setTratamiento(tratamiento);
+            this.enviarFacturaPaciente(turno.getCliente());
         } else {
             System.out.println("El turno no está programado");
         }
+
+    }
+    
+    public void enviarFacturaPaciente(Paciente paciente) {
+    	System.out.println("Factura enviada al paciente: " + paciente.getNombre() + ", " + paciente.getDni());
     }
 }

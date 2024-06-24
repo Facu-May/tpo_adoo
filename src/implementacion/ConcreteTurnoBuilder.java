@@ -92,7 +92,6 @@ public class ConcreteTurnoBuilder implements TurnoMedicoBuilder {
 		// TODO Auto-generated method stub
 		Factura factura = facturaBuilder.build(paciente, turno, total, descuento);
 		turnomedico.setFactura(factura);
-		
 	};
 
 

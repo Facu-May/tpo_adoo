@@ -147,6 +147,26 @@ public class SistemaTest {
     	
     	assertEquals(1, turnosFiltrados2.size());
     }
+    
+    @Test
+    public void TestObserver() {
+    	SistemaClinica sistema = SistemaClinica.getInstance();
+
+    	TurnoMedico turno = sistema.getTurnoMedico(4);
+    	
+    	Subject sujetoConcreto = new ConcreteSubject();
+    	Observer observer = new ConcreteObserver(turno);
+    	
+    	sujetoConcreto.registerObserver(observer);
+    	
+    	sujetoConcreto.notifyObservers("Cancelada", observer);
+    	
+    	assertEquals("Cancelada", turno.getEstado());
+    	
+    }
+    
+    
+
    
     
 
