@@ -16,7 +16,7 @@ public class TurnoMedico {
 	
 	private int complejidad;
 	
-	private Date fechaHora;
+	private String fechaHora;
 	
 	private String estado;
 	
@@ -27,7 +27,7 @@ public class TurnoMedico {
 	private Factura fact;
 
 	public TurnoMedico(Paciente cliente, Medico medicoAsignado, double costoTotal, int complejidad,
-			Date fechaHora, String estado, String motivoConsulta, String tratamiento) {
+			String fechaHora, String estado, String motivoConsulta, String tratamiento) {
 		super();
 		incremental++;
 		this.id = incremental;
@@ -73,11 +73,11 @@ public class TurnoMedico {
 		this.complejidad = complejidad;
 	}
 
-	public Date getFechaHora() {
+	public String getFechaHora() {
 		return fechaHora;
 	}
 
-	public void setFechaHora(Date fechaHora) {
+	public void setFechaHora(String fechaHora) {
 		this.fechaHora = fechaHora;
 	}
 

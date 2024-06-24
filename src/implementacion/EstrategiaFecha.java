@@ -7,12 +7,11 @@ import java.util.List;
 import interfaz.EstrategiaFiltrado;
  
 public class EstrategiaFecha implements EstrategiaFiltrado{
-	private List<TurnoMedico> turnos;
 	@Override
-	public List<TurnoMedico> filtrarBusqueda(TurnoMedico turnoMedico) {
-		List<TurnoMedico> turnosFiltrados = new ArrayList<>();
-		for (TurnoMedico turno : turnos) {
-            if (turno.getFechaHora().equals(turnoMedico.getFechaHora())) {
+	public ArrayList<TurnoMedico> filtrarBusqueda(ArrayList<TurnoMedico> turnosMedicos, String fecha) {
+		ArrayList<TurnoMedico> turnosFiltrados = new ArrayList<>();
+		for (TurnoMedico turno : turnosMedicos) {
+            if (turno.getFechaHora().equals(fecha)) {
                 turnosFiltrados.add(turno);
             }
         }

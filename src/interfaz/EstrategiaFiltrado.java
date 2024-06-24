@@ -1,10 +1,11 @@
 package interfaz;
  
+import java.util.ArrayList;
 import java.util.List;
  
 import implementacion.TurnoMedico;
  
 public interface EstrategiaFiltrado 
 {
-	List<TurnoMedico> filtrarBusqueda(TurnoMedico turno);
+	ArrayList<TurnoMedico> filtrarBusqueda(ArrayList<TurnoMedico> turnosMedicos, String filtrado);
 }
