@@ -48,15 +48,17 @@ public class SistemaClinica implements PagoExterno
     {
         Paciente paciente = getPaciente(dniPaciente);
         Medico medico = getMedico(matriculaMedico);
+        
         /*SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); // Define el formato
         try 
         {
             Date fecha = formato.parse(fch);*/
-            TurnoMedico turno = turnoMedicoBuilder.build(paciente, medico, costo, complejidad, fch, estado, motivo, tratamiento);
-            /* Faltaría la parte dentro de ConcreteTurnoBuilder de crear la factura */
-            turnos.add(turno);
-            System.out.println("se creo el turno: " + turno.getId());
-            return turno;
+        TurnoMedico turno = turnoMedicoBuilder.build(paciente, medico, costo, complejidad, fch, estado, motivo, tratamiento);
+        turnos.add(turno);
+        System.out.println("se creo el turno: " + turno.getId());
+        return turno;
+        
+        
         /*} catch (ParseException e) {
             System.err.println("Error al analizar la fecha: " + e.getMessage());
             return null;

@@ -74,10 +74,11 @@ public class ConcreteTurnoBuilder implements TurnoMedicoBuilder {
 		ArrayList<TurnoMedico> turnosPaciente = paciente.getTurnosMedico();
 		
 		for(TurnoMedico turnoPaciente: turnosPaciente){
+			
             if (turnoPaciente.getFechaHora() != fecha){
                paciente.setListaTurno(turnoPaciente);
             } else{
-                System.out.println("No se puede solicitar, se superpone con uno existente");
+            	System.err.println("No se puede solicitar, se superpone con uno existente");
             }
         }
 		this.turnomedico = new TurnoMedico(paciente, medico, costo, complejidad, fecha, estado, motivo, tratamiento); // <---- acá se crea el objeto

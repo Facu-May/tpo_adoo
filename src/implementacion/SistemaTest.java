@@ -165,10 +165,18 @@ public class SistemaTest {
     	
     }
     
-    
+    @Test
+    public void TurnosSuperpuestos() {
+    	SistemaClinica sistema = SistemaClinica.getInstance();
+    	    	
+		try {
+	    	sistema.crearTurnoMedico(44813781, 3, "Fractura", 2, "Programada", 200, "01/04/2022", "Tratamiento nashe");
+		} catch(RuntimeException e) {
+			assertTrue(e.getMessage().equals("No se puede solicitar, se superpone con uno existente"));
+		}
+    	
+    }
 
-   
     
-
     
 }
