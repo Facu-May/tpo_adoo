@@ -19,20 +19,47 @@ public class SistemaTest {
     private Paciente paciente;
     private Medico medico;
 
-    @Before
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
     	SistemaClinica sistema = SistemaClinica.getInstance();
+    	
+    	//Crear Pacientes
     	sistema.crearPaciente("22/04/2006", 556543,"Jose","Perez", "Calle Falsa 123", "OSDE", true, 5551234);
+    	sistema.crearPaciente("15/04/2004", 44554,"Milito","Perez", "Calle Falsa 123", "OSDE", true, 5551234);
+    	sistema.crearPaciente("27/04/2006", 44813781,"Jose","yuyu", "Calle Falsa 123", "OSDE", true, 5551234);
+    	sistema.crearPaciente("22/01/2006", 44813782,"Juan","lol", "Calle Falsa 123", "OSDE", true, 5551234);
+    	sistema.crearPaciente("22/08/2006", 2222222,"Wilmar","Barrios", "Calle Falsa 123", "OSDE", true, 5551234);
+    	sistema.crearPaciente("22/09/2006", 445642,"Juan","skere", "Calle Falsa 123", "OSDE", true, 5551234);
+    	
+    	//Crear y agregar Medicos
         Medico medico = new Pediatria("Fabian", "sosa", 8);
         sistema.agregarMedico(medico);
+    	medico = new Pediatria("Facundo", "PerezH", 2);
+    	sistema.agregarMedico(medico);
+    	medico = new Pediatria("lOL", "Holand", 3);
+    	sistema.agregarMedico(medico);
+    	medico = new Pediatria("Jorge", "PerezH", 4);
+    	sistema.agregarMedico(medico);
+    	medico = new Odontologia("Jose", "Holand", 5);
+    	sistema.agregarMedico(medico);
+    	medico = new Pediatria("Agus", "Grande", 6);
+    	sistema.agregarMedico(medico);
+
+    	
+        //Crear Turnos
         sistema.crearTurnoMedico(556543, 8, "Hemo", 1, "Programada", 200, "18/09/2022", "Tratamiento super");
+    	sistema.crearTurnoMedico(44813781, 3, "Fractura", 2, "Programada", 200, "01/04/2022", "Tratamiento nashe");
+    	sistema.crearTurnoMedico(44813782, 4, "Fractura", 2, "Programada", 200, "21/04/2022", "Tratamiento nashe");
+    	sistema.crearTurnoMedico(445642, 5, "Fractura", 2, "Programada", 200, "27/04/2022", "Tratamiento nashe");
+    	sistema.crearTurnoMedico(2222222, 6, "Fractura", 2, "Programada", 202, "20/04/2022", "Tratamiento skere");
+    	sistema.crearTurnoMedico(44554, 2, "Fractura", 2, "Programada", 202, "22/04/2022", "Tratamiento skere");
+
         
     }
     
     @Test
     public void testRegistrarNuevoPaciente() {
     	SistemaClinica sistema = SistemaClinica.getInstance();
-    	sistema.crearPaciente("15/04/2004", 44554,"Milito","Perez", "Calle Falsa 123", "OSDE", true, 5551234);
     	Paciente paciente = sistema.getPaciente(44554);
         assertNotNull(paciente);
         assertEquals("Milito", paciente.getNombre()); 
@@ -41,39 +68,32 @@ public class SistemaTest {
     @Test
     public void testRegistrarMedico() {
     	SistemaClinica sistema = SistemaClinica.getInstance();
-    	Medico medico = new Pediatria("Facundo", "PerezH", 2);
-    	sistema.agregarMedico(medico);
-        assertEquals("Facundo", medico.getNombre()); 
+    	Medico medico = sistema.getMedico(8);
+
+        assertEquals("Fabian", medico.getNombre()); 
 
     }
     
     @Test
     public void testGenerarCitaMedica() {
     	SistemaClinica sistema = SistemaClinica.getInstance();
-    	sistema.crearPaciente("1621396800", 44813781,"Jose","Fafa", "Calle Falsa 123", "OSDE", true, 5551234);
-    	Medico medico = new Pediatria("lOL", "Holand", 3);
-    	sistema.agregarMedico(medico);
-    	Paciente paciente = sistema.getPaciente(44813781);
-    	sistema.crearTurnoMedico(44813781, 3, "Fractura", 2, "Programada", 200, "22/04/2022", "Tratamiento nashe");
-    	
+
+    	Paciente paciente = sistema.getPaciente(44813781);    	
     	assertEquals(1, sistema.getTurnoMedico(1).getId());
     }
     
     @Test
     public void testGenerarFactura() {
     	SistemaClinica sistema = SistemaClinica.getInstance();
-    	sistema.crearPaciente("1621396800", 44813782,"Juan","Fafa", "Calle Falsa 123", "OSDE", true, 5551234);
-    	Medico medico = new Pediatria("Jorge", "PerezH", 4);
-    	sistema.agregarMedico(medico);
+
     	Paciente paciente = sistema.getPaciente(44813781);
-    	sistema.crearTurnoMedico(44813782, 4, "Fractura", 2, "Programada", 200, "22/04/2022", "Tratamiento nashe");
-    	
     	assertEquals(1, sistema.getTurnoMedico(1).getFactura().getId());
     }
     
     @Test
     public void testPagoSistemaExterno() {
     	SistemaClinica sistema = SistemaClinica.getInstance();
+
     	assertEquals("Pago Realizado Con Exito",sistema.pagoRealizado());
     }
     
@@ -81,21 +101,9 @@ public class SistemaTest {
     public void filtrarCitasPorEspecialidad() 
     {
     	SistemaClinica sistema = SistemaClinica.getInstance();
-    	sistema.crearPaciente("1621396800", 2222222,"Juan","Fafa", "Calle Falsa 123", "OSDE", true, 5551234);
-    	//creo medicos
-    	Medico medico = new Odontologia("Jose", "Holand", 5);
-    	sistema.agregarMedico(medico);
-    	Medico medico2 = new Pediatria("Agus", "Grande", 6);
-    	sistema.agregarMedico(medico2);
-    	
-    	//creo paciente	
+
     	Paciente paciente = sistema.getPaciente(2222222);
-    	
-    	
-    	sistema.crearTurnoMedico(2222222, 5, "Fractura", 2, "Programada", 200, "22/04/2022", "Tratamiento nashe");
-    	sistema.crearTurnoMedico(2222222, 6, "Fractura", 2, "Programada", 202, "20/04/2022", "Tratamiento skere");
-		
-    	
+    
     	//filtro
     	EstrategiaFiltrado estrategiaMedico = new EstrategiaMedico();
     	sistema.setEstrategiaFiltrado(estrategiaMedico);
@@ -110,31 +118,14 @@ public class SistemaTest {
     public void filtrarCitasPorFecha() 
     {
     	SistemaClinica sistema = SistemaClinica.getInstance();
-    	sistema.crearPaciente("1621396800", 2222222,"Juan","Fafa", "Calle Falsa 123", "OSDE", true, 5551234);
-    	//creo medicos
-    	Medico medico = new Odontologia("Jose", "Holand", 5);
-    	sistema.agregarMedico(medico);
-    	Medico medico2 = new Pediatria("Agus", "Grande", 6);
-    	sistema.agregarMedico(medico2);
-    	
-    	//creo paciente
-    	Paciente paciente = sistema.getPaciente(2222222);
-    	
-    	
-    	//creo turnos
-    	sistema.crearTurnoMedico(2222222, 5, "Fractura", 2, "Programada", 200, "22/04/2022", "Tratamiento nashe");
-    	sistema.crearTurnoMedico(2222222, 6, "Fractura", 2, "Programada", 202, "20/04/2022", "Tratamiento skere");
 
-    	
+    	Paciente paciente = sistema.getPaciente(2222222);
+
     	//filtro
     	EstrategiaFiltrado estrategiaMedico = new EstrategiaFecha();
     	sistema.setEstrategiaFiltrado(estrategiaMedico);
     	ArrayList<TurnoMedico> turnosMedicos1 = sistema.getTurnosMedicos();
     	ArrayList<TurnoMedico> turnosFiltrados1 = sistema.filtrarBusqueda(turnosMedicos1, "22/04/2022");
-    	
-    	for (TurnoMedico turnoMedico : turnosFiltrados1) {
-			System.out.println(turnoMedico.getFechaHora());
-		}
     	
     	assertEquals(1, turnosFiltrados1.size());
     }
@@ -143,30 +134,16 @@ public class SistemaTest {
     public void filtrarCitasPorMatriculaMedico() 
     {
     	SistemaClinica sistema = SistemaClinica.getInstance();
-    	sistema.crearPaciente("1621396800", 2222222,"Juan","Fafa", "Calle Falsa 123", "OSDE", true, 5551234);
-    	//creo medicos
-    	Medico medico = new Odontologia("Jose", "Holand", 5);
-    	sistema.agregarMedico(medico);
-    	Medico medico2 = new Pediatria("Agus", "Grande", 6);
-    	sistema.agregarMedico(medico2);
-    	
-    	//creo paciente
-    	Paciente paciente = sistema.getPaciente(2222222);
-    	
-    	
-    	//creo turnos
-    	sistema.crearTurnoMedico(2222222, 5, "Fractura", 2, "Programada", 200, "22/04/2022", "Tratamiento nashe");
-    	sistema.crearTurnoMedico(2222222, 6, "Fractura", 2, "Programada", 202, "20/04/2022", "Tratamiento skere");
 
-    	
+    	Paciente paciente = sistema.getPaciente(2222222);
+
     	//filtro
     	EstrategiaFiltrado estrategiaMedico = new EstrategiaMatriculaMedico();
     	sistema.setEstrategiaFiltrado(estrategiaMedico);
+    	
     	ArrayList<TurnoMedico> turnosMedicos2 = sistema.getTurnosMedicos();
     	ArrayList<TurnoMedico> turnosFiltrados2 = sistema.filtrarBusqueda(turnosMedicos2, "5");
-    	for (Paciente pacienteSolo : sistema.getPacientes()) {
-			System.out.println(pacienteSolo.getDni());
-		}
+
     	
     	assertEquals(1, turnosFiltrados2.size());
     }

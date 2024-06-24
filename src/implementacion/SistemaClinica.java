@@ -41,6 +41,7 @@ public class SistemaClinica implements PagoExterno
     public void agregarMedico(Medico medico)
     {
         medicos.add(medico);
+        System.out.println("se agrego el medico: " + medico.getNroMatricula());
     }
 
     public TurnoMedico crearTurnoMedico(int dniPaciente, int matriculaMedico, String motivo, int complejidad, String estado, double costo, String fch, String tratamiento)
@@ -54,6 +55,7 @@ public class SistemaClinica implements PagoExterno
             TurnoMedico turno = turnoMedicoBuilder.build(paciente, medico, costo, complejidad, fch, estado, motivo, tratamiento);
             /* Faltaría la parte dentro de ConcreteTurnoBuilder de crear la factura */
             turnos.add(turno);
+            System.out.println("se creo el turno: " + turno.getId());
             return turno;
         /*} catch (ParseException e) {
             System.err.println("Error al analizar la fecha: " + e.getMessage());
@@ -77,7 +79,7 @@ public class SistemaClinica implements PagoExterno
     	return this.pacientes;
     }
 
-    private Medico getMedico(int matriculaMedico) 
+    public Medico getMedico(int matriculaMedico) 
     {
         // TODO Auto-generated method stub
         for(Medico medico: medicos)
