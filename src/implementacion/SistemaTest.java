@@ -12,6 +12,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.mockito.Mockito.*;
+import org.mockito.Mockito;
+
 import interfaz.EstrategiaFiltrado;
 
 public class SistemaTest {
@@ -175,6 +178,27 @@ public class SistemaTest {
 			assertTrue(e.getMessage().equals("No se puede solicitar, se superpone con uno existente"));
 		}
     	
+    }
+    
+    @Test
+    public void testGenerarFacturaConMock() {
+        SistemaClinica sistemaMock = Mockito.mock(SistemaClinica.class);
+        TurnoMedico turnoMock = Mockito.mock(TurnoMedico.class);
+        Factura facturaMock = Mockito.mock(Factura.class);
+
+        // Configuramos el mock para devolver una factura mock
+        when(turnoMock.getFactura()).thenReturn(facturaMock);
+        when(facturaMock.getId()).thenReturn(1);
+
+        // Configuramos el sistema para devolver el turno mock
+        when(sistemaMock.getTurnoMedico(1)).thenReturn(turnoMock);
+
+        // Probamos la generación de la factura
+        assertEquals(1, sistemaMock.getTurnoMedico(1).getFactura().getId());
+
+        // Verificamos que los métodos del mock fueron llamados
+        verify(turnoMock).getFactura();
+        verify(facturaMock).getId();
     }
 
     
